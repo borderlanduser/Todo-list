@@ -20,6 +20,10 @@ body {
 
 .page-header {
   margin-bottom: 25px;
+  background-color: #f8bbd0; 
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .page-header h1 {
@@ -143,6 +147,19 @@ body {
   align-self: stretch;
   font-weight: 600;
   font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; 
+}
+.clear-btn .cross {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.clear-btn:hover {
+  background-color: #ef5350;
 }
 
 .clear-btn:hover {
