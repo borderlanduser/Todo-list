@@ -6,15 +6,14 @@
 }
 
 body {
-  background-color: #fff0f5;
+  background-color: #fdeff3;
   color: #333;
-  padding: 0;
-  max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;  
+  padding: 0;  
 }
 
 .container {
-  padding: 20px;
+  padding: 0; 
 }
 
 
