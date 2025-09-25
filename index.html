@@ -7,14 +7,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="page-header">
+    <h1>Список задач</h1>
+  </div>
+
   <div class="container">
-
-    <!-- Шапка -->
-    <div class="page-header">
-      <h1>Список задач</h1>
-    </div>
-
-    <!-- Новая задача -->
     <div class="new-task-section">
       <h2>Новая задача</h2>
       <div class="new-task-bar">
@@ -23,39 +20,36 @@
       </div>
     </div>
 
-    <!-- Колонки -->
     <div class="tasks-container">
       <div class="task-column backlog-column">
         <h3>Бэклог</h3>
-        <div class="task backlog-task">Выучить JS</div>
-        <div class="task backlog-task">Выучить React</div>
-        <div class="task backlog-task">Сделать домашку</div>
+        <div class="task">Выучить JS</div>
+        <div class="task">Выучить React</div>
+        <div class="task">Сделать домашку</div>
       </div>
 
       <div class="task-column progress-column">
         <h3>В процессе</h3>
-        <div class="task progress-task">Выпить смузи</div>
-        <div class="task progress-task">Попить воды</div>
+        <div class="task">Выпить смузи</div>
+        <div class="task">Попить воды</div>
       </div>
 
       <div class="task-column done-column">
         <h3>Готово</h3>
-        <div class="task done-task">Позвонить маме</div>
-        <div class="task done-task">Погладить кота</div>
+        <div class="task">Позвонить маме</div>
+        <div class="task">Погладить кота</div>
       </div>
 
       <div class="task-column trash-column">
         <h3>Корзина</h3>
-        <div class="task trash-task">Сходить погулять</div>
-        <div class="task trash-task">Прочитать "Войну и Мир"</div>
-        <button class="clear-btn"><span class="cross">✘</span> Очистить</button>
-
+        <div class="task">Сходить погулять</div>
+        <div class="task">Прочитать "Войну и Мир"</div>
+        <button class="clear-btn">
+          <span class="cross">✖</span>
+          <span class="clear-text">Очистить</span>
+        </button>
       </div>
     </div>
   </div>
 </body>
-
 </html>
-
-
-
