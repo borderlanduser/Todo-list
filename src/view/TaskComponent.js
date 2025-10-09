@@ -1,13 +1,23 @@
 import { createElement } from '../framework/render.js';
 
-function createTaskComponentTemplate() {
-  return `<div class="task">Выучить JS</div>`;
+function createTaskComponentTemplate(task) {
+  const {title, status} = task;
+  
+  return `<div class="task task--${status}">
+    ${title}
+  </div>`;
 }
 
 export default class TaskComponent {
-  getTemplate() {
-    return createTaskComponentTemplate();
-  }
+    constructor({task}) {
+        this.task = task;
+        this.element = null;
+    }
+
+    getTemplate() {
+        return createTaskComponentTemplate(this.task);
+    }
+
 
   getElement() {
     if (!this.element) {

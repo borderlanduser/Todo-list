@@ -1,26 +1,24 @@
 
 import HeaderComponent from './view/HeaderComponent.js';
 import AddTaskFormComponent from './view/AddTaskFormComponent.js';
-import TaskBoardComponent from './view/TaskBoardComponent.js';
-import TaskListComponent from './view/TaskListComponent.js';
-import TaskComponent from './view/TaskComponent.js';
+import TaskBoardPresenter from './presenter/tasks-board-presenter.js';
 import { render, RenderPosition } from './framework/render.js';
+import TaskModel from './model/task-model.js';
+
 
 const headerContainer = document.querySelector('.header');
 const addTaskFormContainer = document.querySelector('.add-task-section');
-const taskBoardContainer = document.querySelector('.container');
+const taskBoardContainer = document.querySelector('.tasks-container');
 
-const taskBoardComponent = new TaskBoardComponent();
+const taskModel = new TaskModel();
 
-render(new HeaderComponent(), headerContainer, RenderPosition.BEFOREBEGIN);
-render(new AddTaskFormComponent(), addTaskFormContainer, RenderPosition.BEFOREBEGIN);
-render(taskBoardComponent, taskBoardContainer);
 
-for (let j = 0; j < 4; j++) {
-  const taskListComponent = new TaskListComponent();
-  render(taskListComponent, taskBoardComponent.getElement());
+const taskBoardPresenter = new TaskBoardPresenter({
+    boardContainer: taskBoardContainer,
+    tasksModel: taskModel,
+});
 
-  for (let i = 0; i < 4; i++) {
-    render(new TaskComponent(), taskListComponent.getElement());
-  }
-}
+render(new HeaderComponent(), headerContainer, RenderPosition.BEFOREEND);
+render(new AddTaskFormComponent(), addTaskFormContainer, RenderPosition.BEFOREEND);
+
+taskBoardPresenter.init();

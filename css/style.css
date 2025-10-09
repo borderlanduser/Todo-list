@@ -96,9 +96,15 @@ body {
 
 .tasks-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  width: 100%;              /* тянется ровно на ширину .container */
+  justify-items: stretch;
+  align-items: start;
+  box-sizing: border-box;
 }
+
+
 
 .task-column {
   border-radius: 12px;
@@ -171,4 +177,32 @@ body {
 
 .clear-btn:hover {
   background-color: #ef5350;
+}
+/* ====== Цвета задач по статусу ====== */
+.task--backlog {
+  border-left: 5px solid #7e57c2; /* фиолетовый */
+}
+
+.task--processing {
+  border-left: 5px solid #ec407a; /* розовый */
+  background-color: #fff5f8;
+}
+
+.task--done {
+  border-left: 5px solid #66bb6a; /* зелёный */
+  background-color: #f1f8e9;
+  opacity: 0.95;
+}
+
+.task--basket {
+  border-left: 5px solid #ef5350; /* красный */
+  background-color: #ffebee;
+  opacity: 0.9;
+}
+
+/* Эффекты при наведении */
+.task:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transition: all 0.2s ease;
 }
