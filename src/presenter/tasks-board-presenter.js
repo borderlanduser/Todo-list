@@ -1,50 +1,66 @@
-import TaskBoardComponent from "../view/TaskBoardComponent.js";
 import TaskListComponent from '../view/TaskListComponent.js';
 import TaskComponent from '../view/TaskComponent.js';
-import ClearButtonComponent from '../view/ClearButtonComponent.js'; 
+import TaskBoardComponent from '../view/TaskBoardComponent.js';
 import { render } from '../framework/render.js';
-import { Status, StatusLabel } from "../const.js";
-
+import { Status, StatusLabel } from '../const.js';
+import ClearButtonComponent from '../view/ClearButtonComponent.js';
+import PlugComponent from '../view/PlugComponent.js';
 
 export default class TaskBoardPresenter {
-    taskListComponent = new TaskListComponent();
+  #tasksBoardComponent = new TaskBoardComponent();
+  #clearBtnComponent = new ClearButtonComponent();
+  #boardContainer = null;
+  #tasksModel = null;
+  #boardTasks = [];
 
-    #clearBtnComponent = new ClearButtonComponent();
-    #boardContainer = null;
-    #tasksModel = null;
+  constructor({ boardContainer, tasksModel }) {
+    this.#boardContainer = boardContainer;
+    this.#tasksModel = tasksModel;
+  }
 
-    #tasksBoardComponent = new TaskBoardComponent();
+  init() {
+    this.#boardTasks = [...this.#tasksModel.tasks];
+    this.#renderBoard();
+  }
 
-    #boardTasks = [];
+  #renderTask(task, container) {
+    const taskComponent = new TaskComponent({ task });
+    render(taskComponent, container);
+  }
 
-    constructor({ boardContainer, tasksModel}) {
-        this.#boardContainer = boardContainer;
-        this.#tasksModel = tasksModel;
+  #renderTasksList(status, container) {
+    const tasksListComponent = new TaskListComponent(status, StatusLabel[status]);
+    render(tasksListComponent, container);
+    return tasksListComponent;
+  }
+
+  #renderClearButton(status, container) {
+    if (status === Status.BASKET) {
+      render(this.#clearBtnComponent, container);
     }
+  }
 
-    init() {
-        this.#boardTasks = [...this.#tasksModel.getTasks()];
+  #renderPlugComponent(tasks, container, status) {
+  if (tasks.length === 0) {
+    const plugComponent = new PlugComponent({ status: status });
+    render(plugComponent, container);
+  }
+}
 
-        render(this.#tasksBoardComponent, this.#boardContainer);
-        Object.values(Status).forEach(element => {
-        console.log('Creating column for status:', element);
-        const tasksListComponent = new TaskListComponent(element, StatusLabel[element]);
-        render(tasksListComponent, this.#tasksBoardComponent.getElement());
+  #renderBoard() {
+    render(this.#tasksBoardComponent, this.#boardContainer);
 
-        const filteredTasks = this.#boardTasks.filter(task => task.status === element); 
-        console.log(`Tasks for ${element}:`, filteredTasks);
+    Object.values(Status).forEach((status) => {
+      const tasksListComponent = this.#renderTasksList(status, this.#tasksBoardComponent.element);
+      const filteredTasks = this.#boardTasks.filter((task) => task.status === status);
 
-        for (let j = 0; j < filteredTasks.length; j++) {
-            const taskComponent = new TaskComponent({ task: filteredTasks[j] });
-            const taskListElement = tasksListComponent.getElement().querySelector('.tasks-list');
-            console.log('Rendering task to:', taskListElement);
-            render(taskComponent, taskListElement);
-        }
+      this.#renderPlugComponent(filteredTasks, tasksListComponent.element, status);
 
-        if (element === Status.BASKET) {
-            const clearBtnComponent = new ClearButtonComponent();
-            render(clearBtnComponent, tasksListComponent.getElement());
-        }
+      for (const task of filteredTasks) {
+        this.#renderTask(task, tasksListComponent.element);
+      }
+
+      this.#renderClearButton(status, tasksListComponent.element);
     });
-    }
+  }
 }

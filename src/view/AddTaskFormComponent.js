@@ -1,30 +1,15 @@
-import { createElement } from '../framework/render.js';
+import { AbstractComponent } from '../framework/view/abstract-component.js';
 
-function createFormAddTaskComponentTemplate() {
-  return `
-    <div class="new-task-section">
-      <h2>Новая задача</h2>
-      <div class="new-task-bar">
-        <input type="text" placeholder="Название задачи">
-        <button class="add-btn">Добавить</button>
+export default class AddTaskFormComponent extends AbstractComponent {
+  get template() {  
+    return `
+      <div class="new-task-section">
+        <h2>Новая задача</h2>
+        <div class="new-task-bar">
+          <input type="text" placeholder="Название задачи">
+          <button class="add-btn">Добавить</button>
+        </div>
       </div>
-    </div>
-  `;
-}
-
-export default class AddTaskFormComponent {
-  getTemplate() {
-    return createFormAddTaskComponentTemplate();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+    `;
   }
 }
