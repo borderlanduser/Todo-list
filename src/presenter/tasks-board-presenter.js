@@ -7,21 +7,33 @@ import ClearButtonComponent from '../view/ClearButtonComponent.js';
 import PlugComponent from '../view/PlugComponent.js';
 
 export default class TaskBoardPresenter {
-  #tasksBoardComponent = new TaskBoardComponent();
-  #clearBtnComponent = new ClearButtonComponent();
-  #boardContainer = null;
-  #tasksModel = null;
-  #boardTasks = [];
+  #taskListComponent = new TaskListComponent();
+
+    handleClearButtonClick = () => {
+        this.clearBucket();
+    };
+
+    #clearBtnComponent = new ClearButtonComponent({
+        onClick: this.handleClearButtonClick
+    });
+
+
+    #plugComponent = new PlugComponent();
+    #boardContainer = null;
+    #tasksModel = null;
+
+    #tasksBoardComponent = new TaskBoardComponent();
+    #boardTasks = [];
 
   constructor({ boardContainer, tasksModel }) {
     this.#boardContainer = boardContainer;
     this.#tasksModel = tasksModel;
+    this.#tasksModel.addObserver(this.#handleModelChange.bind(this))
   }
 
   init() {
-    this.#boardTasks = [...this.#tasksModel.tasks];
-    this.#renderBoard();
-  }
+        this.#renderBoard()
+    }
 
   #renderTask(task, container) {
     const taskComponent = new TaskComponent({ task });
@@ -52,7 +64,7 @@ export default class TaskBoardPresenter {
 
     Object.values(Status).forEach((status) => {
       const tasksListComponent = this.#renderTasksList(status, this.#tasksBoardComponent.element);
-      const filteredTasks = this.#boardTasks.filter((task) => task.status === status);
+      const filteredTasks = this.tasks.filter((task) => task.status === status);
 
       this.#renderPlugComponent(filteredTasks, tasksListComponent.element, status);
 
@@ -63,4 +75,45 @@ export default class TaskBoardPresenter {
       this.#renderClearButton(status, tasksListComponent.element);
     });
   }
+  createTask() {
+    console.log('=== createTask called ===');
+    
+    const input = document.querySelector('.inputTask');
+    console.log('Found input:', input);
+    
+    if (!input) {
+        console.error('Input element with class .inputTask not found!');
+        return;
+    }
+    
+    const taskTitle = input.value.trim();
+    console.log('Input value:', taskTitle);
+    
+    if (!taskTitle) {
+        console.log('Empty task title');
+        return;
+    }
+    
+    console.log('Calling addTask with title:', taskTitle);
+    this.#tasksModel.addTask(taskTitle);
+    input.value = '';
+    console.log('Task should be added');
+}
+
+    clearBucket() {
+        this.#tasksModel.clearBucket();
+    }
+
+    #handleModelChange() {
+        this.#clearBoard();
+        this.#renderBoard();
+    }
+
+    #clearBoard() {
+        this.#tasksBoardComponent.element.innerHTML = '';
+    }
+
+    get tasks() {
+        return this.#tasksModel.tasks;
+    }
 }
