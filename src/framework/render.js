@@ -1,4 +1,4 @@
-import { AbstractComponent } from '/src/framework/view/abstract-component.js';
+import { AbstractComponent } from './view/abstract-component.js';
 
 
 const RenderPosition = {
