@@ -1,4 +1,4 @@
-console.log('✅ main.js запущен!');
+
 import HeaderComponent from './view/HeaderComponent.js';
 import AddTaskFormComponent from './view/AddTaskFormComponent.js';
 import TaskBoardPresenter from './presenter/tasks-board-presenter.js';
