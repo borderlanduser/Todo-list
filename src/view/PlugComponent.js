@@ -1,5 +1,5 @@
+import {createElement} from '../framework/render.js'; 
 import { AbstractComponent } from '../framework/view/abstract-component.js';
-import { Status, StatusLabel } from '../const.js';
 
 function createPlugTemplate(status) {
   return `

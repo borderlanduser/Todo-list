@@ -4,17 +4,17 @@ export const tasks = [
   {
     id: "1",
     title: "Сходить в магазин",
-    status:'basket',
+    status:'backlog',
   },
   {
     id: "2", 
     title: "Пойти погулять",
-    status:'basket',
+    status:'backlog',
   },
   {
     id: "3",
     title: "Устроиться на работу", 
-    status:'basket',
+    status:'backlog',
   },
   {
     id: "4",

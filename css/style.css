@@ -203,3 +203,90 @@ body {
   margin-bottom: 10px;
   font-style: italic;
 }
+.task-edit {
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 8px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.task-edit:hover {
+  border-color: #2196f3;
+  box-shadow: 0 6px 16px rgba(33, 150, 243, 0.15);
+}
+
+.task-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-edit-input {
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.task-edit-input:focus {
+  outline: none;
+  border-color: #2196f3;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.task-edit-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.task-edit-save,
+.task-edit-cancel {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.task-edit-save {
+  background: #4caf50;
+  color: white;
+}
+
+.task-edit-save:hover {
+  background: #45a049;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
+.task-edit-save:active {
+  transform: translateY(0);
+}
+
+.task-edit-cancel {
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.task-edit-cancel:hover {
+  background: #e0e0e0;
+  color: #333;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.task-edit-cancel:active {
+  transform: translateY(0);
+}
