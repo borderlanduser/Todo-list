@@ -36,14 +36,13 @@ export default class TaskListComponent extends AbstractComponent {
   }
   #getDropPosition(event) {
   const tasks = Array.from(this.element.querySelectorAll('.task'));
-  
   const mouseY = event.clientY;
   
   if (tasks.length === 0) {
     return 0;
   }
 
-
+  // Только позиции МЕЖДУ задачами (не в начале/конце)
   for (let i = 0; i < tasks.length - 1; i++) {
     const currentTask = tasks[i];
     const nextTask = tasks[i + 1];
@@ -51,18 +50,15 @@ export default class TaskListComponent extends AbstractComponent {
     const currentTaskRect = currentTask.getBoundingClientRect();
     const nextTaskRect = nextTask.getBoundingClientRect();
     
-
-    const betweenTop = currentTaskRect.bottom - 5;
-    const betweenBottom = nextTaskRect.top + 5;
+    // Точка между задачами - середина расстояния между ними
+    const betweenPoint = currentTaskRect.bottom + (nextTaskRect.top - currentTaskRect.bottom) / 2;
     
-    if (mouseY >= betweenTop && mouseY <= betweenBottom) {
-      
-      return i + 1;
+    if (mouseY < betweenPoint) {
+      return i + 1; // Вставляем между currentTask и nextTask
     }
   }
-  
+
+  // Если не нашли позицию между, вставляем в конец
   return tasks.length;
 }
-
-
 }
