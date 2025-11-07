@@ -36,6 +36,7 @@ export default class TaskListComponent extends AbstractComponent {
   }
   
   #getDropPosition(event) {
+<<<<<<< HEAD
     const tasks = Array.from(this.element.querySelectorAll('.task'));
     const mouseY = event.clientY;
     
@@ -139,3 +140,32 @@ export default class TaskListComponent extends AbstractComponent {
     }
   }
 }
+=======
+  const tasks = Array.from(this.element.querySelectorAll('.task'));
+  const mouseY = event.clientY;
+  
+  if (tasks.length === 0) {
+    return 0;
+  }
+
+  // Только позиции МЕЖДУ задачами (не в начале/конце)
+  for (let i = 0; i < tasks.length - 1; i++) {
+    const currentTask = tasks[i];
+    const nextTask = tasks[i + 1];
+    
+    const currentTaskRect = currentTask.getBoundingClientRect();
+    const nextTaskRect = nextTask.getBoundingClientRect();
+    
+    // Точка между задачами - середина расстояния между ними
+    const betweenPoint = currentTaskRect.bottom + (nextTaskRect.top - currentTaskRect.bottom) / 2;
+    
+    if (mouseY < betweenPoint) {
+      return i + 1; // Вставляем между currentTask и nextTask
+    }
+  }
+
+  // Если не нашли позицию между, вставляем в конец
+  return tasks.length;
+}
+}
+>>>>>>> ad803408b42d74b3d93f180898e4b1808f06cb36
