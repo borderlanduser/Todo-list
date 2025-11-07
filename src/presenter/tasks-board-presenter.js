@@ -46,7 +46,7 @@ export default class TasksBoardPresenter {
   }
 
   #handleModelEvent(event, payload) {
-    console.log('Model event:', event);
+    
     
     switch (event) {
       case UpdateType.INIT: // ДОБАВЛЕНО

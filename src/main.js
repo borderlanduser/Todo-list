@@ -32,7 +32,7 @@ const formAddTaskComponent = new AddTaskFormComponent({
 
 render(new HeaderComponent(), headerContainer, RenderPosition.BEFOREEND);
 render(formAddTaskComponent, addTaskFormContainer, RenderPosition.BEFOREEND);
-console.log('Rendered formAddTaskComponent:', formAddTaskComponent.element);
+
 formAddTaskComponent.attachEvents();
 
 taskBoardPresenter.init();

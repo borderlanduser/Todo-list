@@ -9,13 +9,10 @@ const Method = {
 
 export default class TasksApiService extends ApiService {
     get tasks() {
-        console.log('API: Fetching tasks from', `${this._endPoint}/tasks`);
+        
         return this._load({url:'tasks'})
             .then(ApiService.parseResponse)
-            .then(tasks => {
-                console.log('API: Tasks received:', tasks);
-                return tasks;
-            })
+            
             .catch(error => {
                 console.error('API: Error fetching tasks:', error);
                 throw error;

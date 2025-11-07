@@ -290,3 +290,16 @@ body {
 .task-edit-cancel:active {
   transform: translateY(0);
 }
+.drop-indicator {
+  height: 3px;
+  background: #ff5722 !important;
+  margin: 2px 0;
+  border-radius: 2px;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 0; transform: scaleX(0.5); }
+  50% { opacity: 1; transform: scaleX(1.1); }
+  100% { opacity: 1; transform: scaleX(1); }
+}

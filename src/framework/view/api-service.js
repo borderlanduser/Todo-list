@@ -10,11 +10,11 @@ export default class ApiService {
     headers = new Headers(),
     }) {
         const fullUrl = `${this._endPoint}/${url}`;
-        console.log(`API CALL: ${method} ${fullUrl}`, { body, headers });
+        
         
         const response = await fetch(fullUrl, {method, body, headers});
         
-        console.log(`API RESPONSE: ${response.status} ${response.statusText}`);
+        
         
         try {
             ApiService.checkStatus(response);
