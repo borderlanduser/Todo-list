@@ -30,7 +30,7 @@ export default class AddTaskFormComponent extends AbstractComponent {
     if (button && typeof this.#handleClick === 'function') {
       button.addEventListener('click', (evt) => {
         evt.preventDefault();
-        console.log('Add button clicked!');
+        
         this.#handleClick();
       });
     }
